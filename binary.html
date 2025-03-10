@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number System Calculator</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      margin-top: 50px;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      font-weight: bold;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="text-center mb-4">Number System Calculator</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="inputNumber1">Enter first number:</label>
+          <input type="text" class="form-control" id="inputNumber1" placeholder="Enter a number">
+        </div>
+        <div class="form-group">
+          <label for="inputBase1">Select base for first number:</label>
+          <select class="form-control" id="inputBase1">
+            <option value="2">Binary</option>
+            <option value="8">Octal</option>
+            <option value="10">Decimal</option>
+            <option value="16">Hexadecimal</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="inputNumber2">Enter second number:</label>
+          <input type="text" class="form-control" id="inputNumber2" placeholder="Enter a number">
+        </div>
+        <div class="form-group">
+          <label for="inputBase2">Select base for second number:</label>
+          <select class="form-control" id="inputBase2">
+            <option value="2">Binary</option>
+            <option value="8">Octal</option>
+            <option value="10">Decimal</option>
+            <option value="16">Hexadecimal</option>
+          </select>
+     
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="operation">Select operation:</label>
+          <select class="form-control" id="operation">
+            <option value="+">Addition (+)</option>
+            <option value="-">Subtraction (-)</option>
+            <option value="*">Multiplication (*)</option>
+            <option value="/">Division (/)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" onclick="calculate()">Calculate</button>
+    <div id="result"></div>
+    <p> your motivation</p>
+    <p> 👇🏻</p>
+         <img src="digz.jpeg"alt="hello" width=100% height = 500px ></img>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    function calculate() {
+      const inputNumber1 = document.getElementById('inputNumber1').value;
+      const inputBase1 = parseInt(document.getElementById('inputBase1').value);
+      const inputNumber2 = document.getElementById('inputNumber2').value;
+      const inputBase2 = parseInt(document.getElementById('inputBase2').value);
+      const operation = document.getElementById('operation').value;
+
+      let decimalNumber1, decimalNumber2;
+
+      try {
+        decimalNumber1 = parseInt(inputNumber1, inputBase1);
+        decimalNumber2 = parseInt(inputNumber2, inputBase2);
+      } catch (error) {
+        document.getElementById('result').innerHTML = 'Invalid input for the selected bases.';
+        return;
+      }
+
+      let result;
+      let process = '';
+
+      switch (operation) {
+        case '+':
+          result = decimalNumber1 + decimalNumber2;
+          process = `${decimalNumber1} + ${decimalNumber2} = ${result}`;
+          break;
+        case '-':
+          result = decimalNumber1 - decimalNumber2;
+          process = `${decimalNumber1} - ${decimalNumber2} = ${result}`;
+          break;
+        case '*':
+          result = decimalNumber1 * decimalNumber2;
+          process = `${decimalNumber1} * ${decimalNumber2} = ${result}`;
+          break;
+        case '/':
+          if (decimalNumber2 === 0) {
+            document.getElementById('result').innerHTML = 'Division by zero is not allowed.';
+            return;
+          }
+          result = decimalNumber1 / decimalNumber2;
+          process = `${decimalNumber1} / ${decimalNumber2} = ${result}`;
+          break;
+      }
+
+      document.getElementById('result').innerHTML = `
+        <p><strong>Process:</strong> ${process}</p>
+        <p><strong>Result (Decimal):</strong> ${result}</p>
+        <p><strong>Result (Binary):</strong> ${result.toString(2)}</p>
+        <p><strong>Result (Octal):</strong> ${result.toString(8)}</p>
+        <p><strong>Result (Hexadecimal):</strong> ${result.toString(16).toUpperCase()}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
